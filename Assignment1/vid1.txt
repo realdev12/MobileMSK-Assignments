@@ -1,0 +1,4 @@
+In this video we learnt the basics of python such as Type conversion, formatted strings operators, loops, data structures like list and tuple.
+Using this, interesting mini projects were created such as a car game, emoji converter.
+Some other concepts such as classes constructors, functions parameters modules, packages
+Some larger porjects were done like Automation, machine learning, and building a website with django.

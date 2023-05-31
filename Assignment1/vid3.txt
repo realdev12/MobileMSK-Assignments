@@ -1,0 +1,5 @@
+This course was also new to me and there was a lot to learn.
+This video talked about the use of git and github
+It guided us to install git bash on windows in my case.
+It was shown how to configure git, cloning, commit was also shown
+In the end it was taught how to create new repository locally and how to add git to an existing project

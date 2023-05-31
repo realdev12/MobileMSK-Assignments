@@ -1,0 +1,2 @@
+This course wasnt much new that what was taught in the 6 hr video.
+Variable, how to recieve input, type conversion, strings, operators, if statement, while loop, lists, for loops , range function and tuples were covered.

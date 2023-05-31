@@ -1,0 +1,6 @@
+This video taught scripting in linux
+creation of .sh files, editing using nano editor
+Also giving permission to the files using chmod command (r,x permission)
+It was also shown how to write shell bullitin commands, variables, comments
+These were new concepts for me as they were not covered pervioulsly in our courses.
+I used UBUNTU to follow the video and execute the commands
