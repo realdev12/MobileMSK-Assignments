@@ -1,0 +1,41 @@
+This is a 1000 word summary of the running of the FIDDLE repo
+
+Initially, I had no clue as to how and what to run in the repo. I tried to read the read me file but understood very little. At the end of the document, I saw some links to ppt and an article explaining in detail what FIDDLE does and how it works. I tried to read it but did not understand much initially. Next, I forked the given repo to my personal repo and was trying to download the files given one by one. But when I tried to complete the system requirements part(by updating pip and installing docker) I was getting a file not found error continuously while running the docker command. I tried to solve this by searching on the net and this took up a lot of time. After this, I got guided to clone the repo rather than download folders one by one. This made the process easy and the docker command worked smoothly.
+
+Since there were many files in the repo I wasn't sure how many and which ones to run and how to run them. I got guided to read the example usage in the readme file.
+Next, I tried to run the command given in the example usage directly but realized the format was not proper and had to make multiple changes according to the given input format in the readme doc. After this, I was getting an error while giving the path in the cmd of Windows which was not getting resolved even after much effort. The problem was that the Windows method to give absolute and relative paths was different than Linux's. windows use \ while Linux systems uses /. This problem was not getting solved. Hence I decided to switch to Ubuntu to solve this issue.
+
+I installed pip and docker once again, cloned the repo, and ran the system requirements commands, and this time even the example usage commands worked almost correctly after some editing(like making python into python3, removing extra spaces, correcting the paths, adding data_fname and output_dir and removing data_path as was required by the run.py).
+Yet another problem was occurring; the error shown was in the code of one of the files given. I tried to make changes to the code in steps.py. I converted iteritems() to items() since iteritems() are supposedly used in older versions. Next, the error shown was in some other part of the code. This error is:-
+
+"File "/home/tejas/FIDDLE/FIDDLE/steps.py", line 503, in transform_time_series_table
+    index = pd.Index(index, names=['ID', 't_range'])
+TypeError: __new__() got an unexpected keyword argument 'names'"
+
+Due to this error, the output for small_test was not complete- the X_npz file was not created even though the s_npz file was created. Connecting with Apurv Sibal hepled solve this issue. 
+
+The files created were ID.csv, pre_filtered.csv, S.feature_names.jason, S_ID.csv, S.npz,S_all.discretization and S_all.npz,X.feature_names.jason, X_ID.csv, X.npz,X_all.discretization and X_all.npz. The S.npz contains a sparse array of shapes (N,d) and the X.npz contains a sparse tensor of shape(N, L, D). The feature_name files contain names of the d time_invariant variables and the D time dependant variables respectively
+
+Now I tried to load the S_npz and X_npz file that was created using the command given in the readme by creating a seperate file called load.py in the FIDDLE folder
+
+Conclusion: small_test and large_test resulted in the creation of s_npz and X_npz.
+	    icd_test created the S.npz and icd_time_test created X.npz
+
+
+The following is my understanding of FIDDLE and how it works:
+	FIDDLE is a flexible data-driven pipeline. It somewhat generalized the method to convert structured Electronic Health Records to feature vectors. These feature vectors are used by ML and AI algorithms to produce useful outcomes. These may include predictions of viruses that may affect the particular patient or developing new drugs based on large amounts of data.
+	Converting EHR to feature vectors consists of 3 steps: prefiltering, transformation, and post-filtering.
+	Prefiltering is the removal of rows with timestamps outside the observation period and the removal of variables that occur rarely i.e. all rows that occur less than theta1 * 100 times are removed.
+	The transformation step converts data into two parts: A matrix S for the Time invariant data and a tensor X for the time dependent data.
+	Post filtering step removes data that carry little information i.e. features equal to 1 less than theta2 * 100 times are removed.
+	The variable used has the following meaning :
+	N is the number of examples.
+	L is the time bin calculated using floor(T/dt)
+	theta1 is the threshold of the prefilter step
+	theta2 is the threshold of the post-filter step.
+	thetafreq is the threshold to determine a variable is frequent or not.
+	d is the final dimensionality of the time-invariant variables after the post-filtering step.
+	D is the final dimensionality of the time dependent variables after the post-filtering step.
+	
+	The readme doc guides to keep the variables as theta1=theta1=thetafreq = 0.01 * "minority class".
+	The example given was that if predictions need to be made every 4 hours over 48 hour time period, then dt = 4 and T = 48. Hence L = 12 hours
